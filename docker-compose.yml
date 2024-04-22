@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  server:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./db:/app/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
